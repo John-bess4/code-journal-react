@@ -5,7 +5,8 @@ import './assets/css/reset.css';
 import './assets/css/styles.css';
 import EntryForm from './components/EntryForm';
 import Entries from './components/Entries';
-import placeHolderImage from './assets/images/placeholder-image-square.jpg'
+import placeHolderImage from './assets/images/placeholder-image-square.jpg';
+import ModalMenu from './components/ModalMenu';
 
 function App() {
   const [view, setView] = useState('entry-form'); //"entries" | "entry-form"
@@ -17,6 +18,9 @@ function App() {
         <EntryForm />
         <Entries />
       </main>
+      <article>
+        <ModalMenu />
+      </article>
     </>
   );
 }

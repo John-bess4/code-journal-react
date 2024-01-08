@@ -7,7 +7,7 @@ export default function NavBar() {
           <div className="column-full d-flex align-center">
             <h1 className="white-text">Code Journal</h1>
             <h3>
-              <a id="entriesLink" className="entries-link white-text">
+              <a id="entriesLink" className="entries-link white-text" href="#">
                 Entries
               </a>
             </h3>
