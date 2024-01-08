@@ -1,16 +1,21 @@
 import { useState } from 'react';
-import NavBar from './components/NavBar';
+
 import './assets/css/layout.css';
 import './assets/css/reset.css';
 import './assets/css/styles.css';
-import EntryForm from './components/EntryForm';
-import Entries from './components/Entries';
+
+import NavBar from './assets/components/NavBar';
+import EntryForm from './assets/components/EntryForm';
+import Entries from './assets/components/Entries';
+import ModalMenu from './assets/components/ModalMenu';
+
 import placeHolderImage from './assets/images/placeholder-image-square.jpg';
-import ModalMenu from './components/ModalMenu';
 
 function App() {
   const [view, setView] = useState('entry-form'); //"entries" | "entry-form"
   const [image, setImage] = useState(placeHolderImage);
+
+
   return (
     <>
       <NavBar />
