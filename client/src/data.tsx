@@ -6,12 +6,9 @@ export type UnsavedEntry = {
 export type Entry = UnsavedEntry & {
   entryId: number;
 };
-
-type Views = 'entries' | 'entry-form';
 type Data = {
   entries: Entry[];
   nextEntryId: number;
-  view: Views;
 };
 
 const dataKey = 'code-journal-data';
@@ -25,7 +22,6 @@ function readData(): Data {
     data = {
       entries: [],
       nextEntryId: 1,
-      view: 'entries',
     };
   }
   return data;
@@ -59,12 +55,6 @@ export function updateEntry(entry: Entry): Entry {
   data.entries = newEntries;
   writeData(data);
   return entry;
-}
-
-export function updateView(view: Views): void {
-  const data = readData();
-  data.view = view;
-  writeData(data);
 }
 
 export function removeEntry(entryId: number): void {

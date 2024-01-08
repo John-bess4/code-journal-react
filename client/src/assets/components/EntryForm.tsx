@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 function TitleHeader() {
   return (
     <div className="row">
@@ -8,14 +10,18 @@ function TitleHeader() {
   );
 }
 
-function Row1() {
+type Row1Props = {
+  onImageURLChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  imageURL: string;
+};
+function Row1({ imageURL, onImageURLChange }: Row1Props) {
   return (
     <div className="row margin-bottom-1">
       <div className="column-half">
         <img
           className="input-b-radius form-image"
           id="formImage"
-          src="src/assets/images/placeholder-image-square.jpg"
+          src={imageURL || 'src/assets/images/placeholder-image-square.jpg'}
           alt="image of entry image"
         />
       </div>
@@ -34,6 +40,7 @@ function Row1() {
           Photo URL
         </label>
         <input
+          onChange={onImageURLChange}
           required
           className="input-b-color text-padding input-b-radius purple-outline input-height margin-bottom-2 d-block width-100"
           type="text"
@@ -82,13 +89,31 @@ function Row3() {
   );
 }
 
-export default function EntryForm() {
-  return (
-    <div className="container" data-view="entry-form">
-      <TitleHeader />
-      <form id="entryForm">
-        <Row1 />
+type EntryForm = {
+  hidden: boolean;
+};
+export default function EntryForm({ hidden }: EntryForm) {
+  const [imageURL, setImageURL] = useState('');
 
+  function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setImageURL(event.target.value);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const formData = new FormData(target);
+    const { formTitle, formURL, formNotes } = Object.fromEntries(
+      formData.entries()
+    );
+    console.log(formTitle, formURL, formNotes);
+  }
+  return (
+    <div
+      className={`container${!hidden ? ' hidden' : ''}`}
+      data-view="entry-form">
+      <TitleHeader />
+      <form id="entryForm" onSubmit={handleSubmit}>
+        <Row1 onImageURLChange={handleImageChange} imageURL={imageURL} />
         <Row2 />
 
         <Row3 />

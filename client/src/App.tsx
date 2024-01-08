@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+// import { UnsavedEntry, Entry } from './data.tsx'
+
 import './assets/css/layout.css';
 import './assets/css/reset.css';
 import './assets/css/styles.css';
@@ -9,19 +11,26 @@ import EntryForm from './assets/components/EntryForm';
 import Entries from './assets/components/Entries';
 import ModalMenu from './assets/components/ModalMenu';
 
-import placeHolderImage from './assets/images/placeholder-image-square.jpg';
-
 function App() {
   const [view, setView] = useState('entry-form'); //"entries" | "entry-form"
-  const [image, setImage] = useState(placeHolderImage);
 
+  function handleEntriesClick() {
+    setView('entries');
+  }
+
+  function handleNewEntryClick() {
+    setView('entry-form');
+  }
 
   return (
     <>
-      <NavBar />
+      <NavBar onEntriesClick={handleEntriesClick} />
       <main>
-        <EntryForm />
-        <Entries />
+        <EntryForm hidden={view === 'entry-form'} />
+        <Entries
+          onNewEntryClick={handleNewEntryClick}
+          hidden={view === 'entries'}
+        />
       </main>
       <article>
         <ModalMenu />
